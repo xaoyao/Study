@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="CircleView">
+        <attr name="circle_color" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="KTCircleView">
+        <attr name="cl_color" format="color"/>
+    </declare-styleable>
+
+
+</resources>
