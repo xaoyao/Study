@@ -2,7 +2,9 @@ package com.example.chapter5demo
 
 import android.app.Notification
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
@@ -22,6 +24,8 @@ class MainActivity : AppCompatActivity() {
     private val mBtnLargeText by lazy { findViewById(R.id.btn_large_text) as Button }
     private val mBtnLargeImage by lazy { findViewById(R.id.btn_large_image) as Button }
     private val mBtnProgress by lazy { findViewById(R.id.btn_progress) as Button }
+    private val mBtnInBoxStyle by lazy { findViewById(R.id.btn_InBoxStyle) as Button }
+    private val mBtnHangup by lazy { findViewById(R.id.btn_hangup) as Button }
 
     private val mNotificationManager by lazy { getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager }
 
@@ -102,6 +106,43 @@ class MainActivity : AppCompatActivity() {
                 mNotificationManager.notify(2, builder.build())
                 mNotificationManager.cancel(2)
             }
+
+        }
+
+        mBtnInBoxStyle.setOnClickListener {
+            val builder = NotificationCompat.Builder(this@MainActivity)
+            builder.setSmallIcon(R.mipmap.ic_launcher)
+                    .setAutoCancel(true)
+                    .setContentTitle("InBoxStyle")
+                    .setContentText("通知内容")
+                    .setDefaults(Notification.DEFAULT_SOUND or Notification.DEFAULT_LIGHTS)
+            val inBoxStyle = android.support.v4.app.NotificationCompat.InboxStyle()
+            inBoxStyle.setBigContentTitle("BigContentTitle")
+                    .addLine("第一行 第一行 第一行 第一行 第一行 第一行 第一行 第一行")
+                    .addLine("第二行")
+                    .addLine("第三行")
+                    .addLine("第四行")
+                    .addLine("第五行")
+                    .setSummaryText("SummaryText")
+            builder.setStyle(inBoxStyle)
+            mNotificationManager.notify(3, builder.build())
+        }
+
+        mBtnHangup.setOnClickListener {
+            val intent = Intent(this@MainActivity, MainActivity::class.java)
+            val pendingIntent = PendingIntent.getActivity(this@MainActivity, 0, intent,
+                    PendingIntent.FLAG_UPDATE_CURRENT)
+
+            val builder = NotificationCompat.Builder(this@MainActivity)
+            builder.setSmallIcon(R.mipmap.ic_launcher)
+                    .setLargeIcon(BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher))
+                    .setContentTitle("横幅通知")
+                    .setContentText("通知内容")
+                    .setDefaults(Notification.DEFAULT_ALL)
+                    .setAutoCancel(true)
+                    .setContentIntent(pendingIntent)
+                    .setFullScreenIntent(pendingIntent, true)
+            mNotificationManager.notify(4, builder.build())
 
         }
 

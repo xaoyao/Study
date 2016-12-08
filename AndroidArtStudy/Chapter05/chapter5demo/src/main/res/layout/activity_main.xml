@@ -28,10 +28,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="大图模式" />
+
     <Button
         android:id="@+id/btn_progress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="进度条模式"/>
+        android:text="进度条模式" />
+
+    <Button
+        android:id="@+id/btn_InBoxStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="InBoxStyle"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn_hangup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="悬挂式" />
 
 </LinearLayout>
